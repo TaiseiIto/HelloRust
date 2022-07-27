@@ -8,7 +8,7 @@ RUN git config --global pull.rebase false
 # gpg
 RUN apk add --no-cache gnupg
 # rust
-RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
 # ssh
 RUN apk add --no-cache openssh
 RUN mkdir /root/.ssh
