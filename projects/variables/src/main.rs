@@ -1,4 +1,5 @@
 fn main() {
+    // 3.1
     // Immutable value
     let x = 5;
     // Shadowing
@@ -17,5 +18,23 @@ fn main() {
     // Constant value
     const CONSTANT_VALUE:u8 = 0x10;
     println!("CONSTANT_VALUE = {:#02x}", CONSTANT_VALUE);
+
+    // 3.2
+    // &str to u32
+    let guess:u32 = "42".parse().expect("Not a number!");
+    println!("guess = {}", guess);
+    // Double
+    let sum:i32 = 5 + 10;
+    let difference:f64 = 95.5 - 4.3;
+    let product:i32 = 4 * 30;
+    let quotient:f64 = 56.7 / 32.2;
+    let floored:i32 = 2 / 3;
+    let remainder:i32 = 43 % 5;
+    println!("sum = {}", sum);
+    println!("difference = {}", difference);
+    println!("product = {}", product);
+    println!("quotient = {}", quotient);
+    println!("floored = {}", floored);
+    println!("remainder = {}", remainder);
 }
 
