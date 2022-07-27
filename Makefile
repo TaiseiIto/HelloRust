@@ -24,10 +24,10 @@ devenv:
 # Only the developer can execute it.
 # usage : $ make gitconfig KEY=<GitHub private key path> GPG=<.gnupg path>
 gitconfig:
-	$(DOCKER) cp $(KEY) $(DOCKER_CONTAINER_NAME):/root/HelloRust/ssh/github && \
-	$(DOCKER) cp $(GPG) $(DOCKER_CONTAINER_NAME):/root/.gnupg && \
+	$(DOCKER) cp $(KEY) $(DOCKER_CONTAINER):/root/HelloRust/ssh/github && \
+	$(DOCKER) cp $(GPG) $(DOCKER_CONTAINER):/root/.gnupg && \
 	make docker-start && \
-	$(DOCKER) exec -it $(DOCKER_CONTAINER_NAME) /root/HelloRust/git/gitconfig.sh
+	$(DOCKER) exec -it $(DOCKER_CONTAINER) /root/HelloRust/git/gitconfig.sh
 
 rebuild-devenv: clean-devenv
 	make devenv
