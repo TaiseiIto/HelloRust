@@ -1,4 +1,4 @@
-PROJECTS = $(shell ls -l | grep ^d.*$ | awk '{print $$NF}')
+PROJECTS = $(shell ls -l | grep '^d.*$$' | awk '{print $$NF}')
 
 all:
 	for i in $(PROJECTS); do \
