@@ -1,7 +1,7 @@
 COMPILER = rustc
 REMOVE = rm
 SOURCE = $(shell ls *.rs)
-TARGET = $(SOURCE.rs:)
+TARGET = $(SOURCE:.rs=)
 
 all: $(TARGET)
 
