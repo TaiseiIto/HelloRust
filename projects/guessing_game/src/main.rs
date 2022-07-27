@@ -2,10 +2,10 @@ use rand::Rng;
 use std::io::Write;
 
 fn main() {
-    let mut guess:String = String::new();
     let secret_number:u8 = rand::thread_rng().gen_range(1..=100);
     println!("The secret number is : {}", secret_number);
     loop {
+        let mut guess:String = String::new();
         println!("Guess the number!");
         print!("Please input your guess : ");
         std::io::stdout().flush().unwrap();
