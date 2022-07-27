@@ -15,6 +15,12 @@ SCRIPT_PREFIX = ./
 SCRIPT_SUFFIX = .sh
 endif
 
+all:
+	make -C projects
+
+clean:
+	make clean -C projects
+
 clean-devenv:
 	$(SCRIPT_PREFIX)script$(DELIMITER)clean-devenv$(SCRIPT_SUFFIX) $(DOCKER) $(DOCKER_IMAGE) $(DOCKER_CONTAINER)
 
@@ -28,6 +34,9 @@ gitconfig:
 	$(DOCKER) cp $(GPG) $(DOCKER_CONTAINER):/root/.gnupg && \
 	$(DOCKER) start $(DOCKER_CONTAINER)
 	$(DOCKER) exec -it $(DOCKER_CONTAINER) /root/HelloRust/git/gitconfig.sh
+
+rebuild:
+	make rebuild -C projects
 
 rebuild-devenv: clean-devenv
 	make devenv
