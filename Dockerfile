@@ -7,6 +7,8 @@ RUN apk add --no-cache alpine-sdk
 RUN git config --global pull.rebase false
 # gpg
 RUN apk add --no-cache gnupg
+# rust
+RUN curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 # ssh
 RUN apk add --no-cache openssh
 RUN mkdir /root/.ssh
