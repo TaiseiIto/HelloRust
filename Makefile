@@ -26,7 +26,7 @@ devenv:
 gitconfig:
 	$(DOCKER) cp $(KEY) $(DOCKER_CONTAINER):/root/HelloRust/ssh/github && \
 	$(DOCKER) cp $(GPG) $(DOCKER_CONTAINER):/root/.gnupg && \
-	make docker-start && \
+	$(DOCKER) start $(DOCKER_CONTAINER)
 	$(DOCKER) exec -it $(DOCKER_CONTAINER) /root/HelloRust/git/gitconfig.sh
 
 rebuild-devenv: clean-devenv
