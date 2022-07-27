@@ -28,4 +28,13 @@ $ make rebuild-devenv
 $ make clean-devenv
 $
 ```
+## For the developper
+
+### git config
+
+Only the developer can execute it.
+
+```
+$ make gitconfig KEY=<GitHub private key path> GPG=<.gnupg path>
+```
 
