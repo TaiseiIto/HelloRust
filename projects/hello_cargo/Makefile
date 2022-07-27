@@ -10,6 +10,12 @@ build: $(DEBUG)
 check:
 	cargo check
 
+clean:
+	rm $(DEBUG) $(RELEASE)
+
+rebuild: clean
+	make
+
 run:
 	cargo run
 
