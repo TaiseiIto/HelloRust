@@ -41,6 +41,16 @@ There is a `projects` directory that has Rust projects.
 ~/HelloRust #
 ```
 
+### Create a new project
+
+Create a new project `new_project`.
+
+```
+~/HelloRust/projects # make projects NAME=new_project
+...
+~/HelloRust/projects #
+```
+
 ## For the developper
 
 ### git config
