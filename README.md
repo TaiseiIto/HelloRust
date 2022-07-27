@@ -46,7 +46,7 @@ There is a `projects` directory that has Rust projects.
 Create a new project `new_project`.
 
 ```
-~/HelloRust/projects # make projects NAME=new_project
+~/HelloRust/projects # make project NAME=new_project
 ...
 ~/HelloRust/projects #
 ```
