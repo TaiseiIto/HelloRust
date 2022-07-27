@@ -21,6 +21,14 @@ clean-devenv:
 devenv:
 	$(SCRIPT_PREFIX)script$(DELIMITER)devenv$(SCRIPT_SUFFIX) $(DOCKER) $(DOCKER_IMAGE) $(DOCKER_IMAGE_TAG) $(DOCKER_CONTAINER)
 
+# Only the developer can execute it.
+# usage : $ make gitconfig KEY=<GitHub private key path> GPG=<.gnupg path>
+gitconfig:
+	$(DOCKER) cp $(KEY) $(DOCKER_CONTAINER_NAME):/root/HelloRust/ssh/github && \
+	$(DOCKER) cp $(GPG) $(DOCKER_CONTAINER_NAME):/root/.gnupg && \
+	make docker-start && \
+	$(DOCKER) exec -it $(DOCKER_CONTAINER_NAME) /root/HelloRust/git/gitconfig.sh
+
 rebuild-devenv: clean-devenv
 	make devenv
 
