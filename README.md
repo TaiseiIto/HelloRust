@@ -28,6 +28,19 @@ $ make rebuild-devenv
 $ make clean-devenv
 $
 ```
+
+## In the docker environment
+
+### Build the Rust projects
+
+There is a `projects` directory that has Rust projects.
+
+```
+~/HelloRust # make
+...
+~/HelloRust #
+```
+
 ## For the developper
 
 ### git config
