@@ -1,7 +1,7 @@
 DOCKER = docker
-DOCKER_IMAGE = HelloRust
+DOCKER_IMAGE = hello-rust
 DOCKER_IMAGE_TAG = latest
-DOCKER_CONTAINER = HelloRust
+DOCKER_CONTAINER = hello-rust
 GENIMG = genimg/genimg
 
 ifeq ($(OS), Windows_NT)
