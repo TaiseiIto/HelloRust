@@ -1,16 +1,29 @@
-COMPILER = rustc
-REMOVE = rm
-SOURCE = $(shell ls *.rs)
-TARGET = $(SOURCE:.rs=)
+PROJECT = $(shell pwd | awk -F '/' '{print $$NF}')
+DEBUG = target/debug/$(PROJECT)
+RELEASE = target/release/$(PROJECT)
+SOURCE = $(shell find src | grep '^.*\.rs$$')
 
-all: $(TARGET)
+all: $(RELEASE)
+	./target/release/$(PROJECT)
+
+build: $(DEBUG)
+
+check:
+	cargo check
 
 clean:
-	$(REMOVE) $(TARGET)
+	rm $(DEBUG) $(RELEASE)
 
 rebuild: clean
 	make
 
-$(TARGET): $(SOURCE)
-	$(COMPILER) $(SOURCE)
+run:
+	cargo run
+
+$(RELEASE): $(SOURCE)
+	cargo build --release
+
+
+$(DEBUG): $(SOURCE)
+	cargo build
 
