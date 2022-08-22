@@ -1,6 +1,9 @@
-fn calculate_length(s: String) -> (String, usize) {
-    let length = s.len();
-    (s, length)
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world!");
 }
 
 fn gives_ownership() -> String {
@@ -25,8 +28,16 @@ fn main() {
     println!("s1 = {}", s1);
     println!("s3 = {}", s3);
     let s1: String = String::from("hello");
-    let (s2, len): (String, usize) = calculate_length(s1);
-    println!("The length of \"{}\" is {}.", s2, len);
+    let len: usize = calculate_length(&s1);
+    println!("The length of \"{}\" is {}.", s1, len);
+    let mut s: String = String::from("hello");
+    {
+        let r1: &mut String = &mut s;
+        change(r1);
+    }
+    let r2: &mut String = &mut s;
+    change(r2);
+    println!("s = {}", s);
 }
 
 fn makes_copy(some_integer: i32) {
