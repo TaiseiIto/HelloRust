@@ -34,6 +34,7 @@ gitconfig:
 	$(DOCKER) cp $(GPG) $(DOCKER_CONTAINER):/root/.gnupg && \
 	$(DOCKER) start $(DOCKER_CONTAINER)
 	$(DOCKER) exec -it $(DOCKER_CONTAINER) /root/HelloRust/git/gitconfig.sh
+	$(DOCKER) stop $(DOCKER_CONTAINER)
 
 rebuild:
 	make rebuild -C projects
