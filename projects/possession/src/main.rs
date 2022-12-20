@@ -6,7 +6,7 @@ fn change(some_string: &mut String) {
     some_string.push_str(", world!");
 }
 
-fn first_word(s: &String) -> &str {
+fn first_word(s: &str) -> &str {
 	let mut begin_index: usize = 0;
 	let mut begin_index_found: bool = false;
 	let mut end_index: usize = s.len();
@@ -79,7 +79,7 @@ fn makes_copy(some_integer: i32) {
     println!("some_integer = {}", some_integer);
 }
 
-fn second_word(s: &String) -> &str {
+fn second_word(s: &str) -> &str {
 	let mut word_counter: u32 = 0;
 	let mut begin_index: usize = 0;
 	let mut begin_index_found: bool = false;
