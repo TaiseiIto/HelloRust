@@ -5,6 +5,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
 # gcc, ld, make, etc.
 RUN apt install build-essential -y
+# curl
+RUN apt install curl -y
 # git
 RUN apt install git -y
 RUN apt install git-email -y
