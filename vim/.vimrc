@@ -1,27 +1,11 @@
-" Indent for C
-set cindent
-
-" Inclemental search
-set incsearch
-
-" print file name always
-set laststatus=2
-
-" Inclement alphabet by Ctrl a
-set nf=alpha,hex
-
-" print line number
-set number
-
-" Paste literally
-set paste
-
-" print cursor relative line number
-set relativenumber
-
-" print cursor position
-set ruler
-
-" Show command being entered
-set showcmd
-
+set cindent		" Indent for C
+set expandtab		" Expand tab to spaces
+set incsearch		" Inclemental search
+set laststatus=2	" print file name always
+set nf=alpha,hex	" Inclement alphabet by Ctrl a
+set number		" print line number
+set paste		" Paste literally
+set relativenumber	" print cursor relative line number
+set ruler		" print cursor position
+set showcmd		" Show command being entered
+set tabstop=4		" 1 tab is 4 spaces
