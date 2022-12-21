@@ -15,6 +15,10 @@ project:
 	cargo new $(NAME)
 	cp ProjectMakefileTemplate $(NAME)/Makefile
 
+# Usage : $ make library NAME=<library name>
+library:
+	cargo new --lib $(NAME)
+
 rebuild:
 	for i in $(PROJECTS); do \
 		make rebuild -C $$i; \
