@@ -13,12 +13,12 @@ clean:
 # Usage : $ make project NAME=<project name>
 project:
 	cargo new $(NAME)
-	cp ProjectMakefileTemplate $(NAME)/Makefile
+	cp ProjectMakefile $(NAME)/Makefile
 
 # Usage : $ make library NAME=<library name>
 library:
 	cargo new --lib $(NAME)
-	cp ProjectMakefileTemplate $(NAME)/Makefile
+	cp LibraryMakefile $(NAME)/Makefile
 
 rebuild:
 	for i in $(PROJECTS); do \
