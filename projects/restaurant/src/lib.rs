@@ -41,10 +41,12 @@ mod back_of_house {
 	fn cook_order() {}
 }
 
+pub use self::front_of_house::hosting;
+
 pub fn eat_at_restaurant() {
 	// Absolute path
-	crate::front_of_house::hosting::add_to_waitlist();
-	crate::front_of_house::hosting::seat_at_table();
+	hosting::add_to_waitlist();
+	hosting::seat_at_table();
 	// Relative path
 	front_of_house::serving::take_order();
 	front_of_house::serving::serve_order();
