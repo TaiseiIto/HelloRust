@@ -117,6 +117,14 @@ fn print_value(x: u8) {
 	}
 }
 
+fn is_three(x: u8) {
+	if let 3 = x {
+		println!("three");
+	} else {
+		println!("not three");
+	}
+}
+
 fn main() {
 	let home = IpAddr::V4(127, 0, 0, 1);
 	let loopback = IpAddr::V6(String::from("::1"));
@@ -199,5 +207,15 @@ fn main() {
 	print_value(4);
 	println!("print_value(5)");
 	print_value(5);
+	println!("is_three(1)");
+	is_three(1);
+	println!("is_three(2)");
+	is_three(2);
+	println!("is_three(3)");
+	is_three(3);
+	println!("is_three(4)");
+	is_three(4);
+	println!("is_three(5)");
+	is_three(5);
 }
 
