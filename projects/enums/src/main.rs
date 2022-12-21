@@ -100,6 +100,23 @@ fn value_in_cents(coin: Coin) -> i32 {
 	}
 }
 
+fn plus_one(x: Option<i32>) -> Option<i32> {
+	match x {
+		Some(i) => Some(i + i),
+		None => None,
+	}
+}
+
+fn print_value(x: u8) {
+	match x {
+		1 => println!("one"),
+		2 => println!("two"),
+		3 => println!("three"),
+		4 => println!("four"),
+		_ => (),
+	}
+}
+
 fn main() {
 	let home = IpAddr::V4(127, 0, 0, 1);
 	let loopback = IpAddr::V6(String::from("::1"));
@@ -170,5 +187,17 @@ fn main() {
 	println!("value_in_cents(Coin::Quarter(UsState::WestVirginia)) = {}", value_in_cents(Coin::Quarter(UsState::WestVirginia)));
 	println!("value_in_cents(Coin::Quarter(UsState::Wisconsin)) = {}", value_in_cents(Coin::Quarter(UsState::Wisconsin)));
 	println!("value_in_cents(Coin::Quarter(UsState::Wyoming)) = {}", value_in_cents(Coin::Quarter(UsState::Wyoming)));
+	println!("plus_one(None) = {:#?}", plus_one(None));
+	println!("plus_one(Sone(5)) = {:#?}", plus_one(Some(5)));
+	println!("print_value(1)");
+	print_value(1);
+	println!("print_value(2)");
+	print_value(2);
+	println!("print_value(3)");
+	print_value(3);
+	println!("print_value(4)");
+	print_value(4);
+	println!("print_value(5)");
+	print_value(5);
 }
 
