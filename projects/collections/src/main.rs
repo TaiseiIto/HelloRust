@@ -52,5 +52,24 @@ fn main() {
 	for c in "hello".bytes() {
 		println!("{}", c);
 	}
+	let mut scores: std::collections::HashMap<String, i32> = std::collections::HashMap::new();
+	scores.insert("Blue".to_string(), 10);
+	scores.insert("Yellow".to_string(), 50);
+	println!("scores = {:#?}", scores);
+	let teams: Vec<String> = vec!["Blue".to_string(), "Yellow".to_string()];
+	println!("teams = {:#?}", teams);
+	let initial_scores: Vec<i32> = vec![10, 50];
+	println!("initial_scores = {:#?}", initial_scores);
+	let scores: std::collections::HashMap<&String, &i32> = teams.iter().zip(initial_scores.iter()).collect();
+	println!("scores = {:#?}", scores);
+	println!("scores.get(&\"Blue\".to_string()) = {:?}", scores.get(&"Blue".to_string()));
+	for (key, value) in &scores {
+		println!("{}: {}", key, value);
+	}
+	let mut scores: std::collections::HashMap<String, i32> = std::collections::HashMap::new();
+	scores.insert("Blue".to_string(), 10);
+	println!("scores = {:#?}", scores);
+	scores.insert("Blue".to_string(), 25);
+	println!("scores = {:#?}", scores);
 }
 
