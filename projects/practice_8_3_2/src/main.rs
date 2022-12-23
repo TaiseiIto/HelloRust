@@ -62,7 +62,7 @@ fn pig_latin(text: &str) -> String {
 
 fn main() {
 	let mut text: String = String::new();
-	print!("Input some test : ");
+	print!("Input some text : ");
     std::io::stdout().flush().unwrap();
 	std::io::stdin().read_line(&mut text).expect("Failed to read line");
 	let text: String = (&text[..text.len() - 1]).to_string();
