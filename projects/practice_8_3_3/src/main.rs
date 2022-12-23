@@ -33,28 +33,43 @@ fn analyse_command(line: &str) -> Option<Command> {
 	}
 }
 
-fn execute_command(command: Command) {
+fn execute_command(command: Command, _: &std::collections::HashMap<String, Vec<String>>) -> bool {
 	match command {
-		Command::Add {employee, department} => println!("Add {} to {}", employee, department),
-		Command::List {department: None} => println!("List employees of all departments"),
-		Command::List {department: Some(department)} => println!("List employees of {}", department),
-		Command::Quit => println!("quit"),
+		Command::Add {employee, department} => {
+			println!("Add {} to {}", employee, department);
+			true
+		},
+		Command::List {department: None} => {
+			println!("List employees of all departments");
+			true
+		},
+		Command::List {department: Some(department)} => {
+			println!("List employees of {}", department);
+			true
+		},
+		Command::Quit => {
+			println!("quit");
+			false
+		},
 	}
 }
 
-fn interact(organization: &std::collections::HashMap<String, Vec<String>>) -> &std::collections::HashMap<String, Vec<String>> {
+fn interact(organization: &std::collections::HashMap<String, Vec<String>>) -> bool {
 	let mut command: String = String::new();
 	print!("manage employees > ");
 	std::io::stdout().flush().unwrap();
 	std::io::stdin().read_line(&mut command).expect("Failed to read line");
-	if let Some(command) = analyse_command(&*command) {
-		execute_command(command);
+	match analyse_command(&*command) {
+		Some(command) => execute_command(command, organization),
+		None => true,
 	}
-	organization
 }
 
 fn main() {
 	let organization: std::collections::HashMap<String, Vec<String>> = std::collections::HashMap::new();
-	interact(&organization);
+	let mut continuation: bool = true;
+	while continuation {
+		continuation = interact(&organization);
+	}
 }
 
