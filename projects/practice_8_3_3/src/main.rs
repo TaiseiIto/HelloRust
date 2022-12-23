@@ -33,18 +33,21 @@ fn analyse_command(line: &str) -> Option<Command> {
 	}
 }
 
-fn execute_command(command: Command, organization: &std::collections::HashMap<String, Vec<String>>) -> bool {
+fn execute_command(command: Command, organization: &mut std::collections::HashMap<String, Vec<String>>) -> bool {
 	match command {
 		Command::Add {employee, department} => {
 			println!("Add {} to {}", employee, department);
+			let employees: &mut Vec<String> = organization.entry(department).or_insert(Vec::new());
+			employees.push(employee);
 			true
 		},
 		Command::List {department: None} => {
 			println!("List employees of all departments");
+			let organization: std::collections::HashMap<String, Vec<String>> = organization.clone();
 			let mut departments: Vec<&String> = organization.keys().collect::<Vec<&String>>();
 			departments.sort();
 			for department in departments {
-				execute_command(Command::List {department: Some(department.to_string())}, organization);
+				execute_command(Command::List {department: Some(department.to_string())}, &mut organization.clone());
 			}
 			true
 		},
@@ -66,7 +69,7 @@ fn execute_command(command: Command, organization: &std::collections::HashMap<St
 	}
 }
 
-fn interact(organization: &std::collections::HashMap<String, Vec<String>>) -> bool {
+fn interact(organization: &mut std::collections::HashMap<String, Vec<String>>) -> bool {
 	let mut command: String = String::new();
 	print!("manage employees > ");
 	std::io::stdout().flush().unwrap();
@@ -78,10 +81,10 @@ fn interact(organization: &std::collections::HashMap<String, Vec<String>>) -> bo
 }
 
 fn main() {
-	let organization: std::collections::HashMap<String, Vec<String>> = std::collections::HashMap::new();
+	let mut organization: std::collections::HashMap<String, Vec<String>> = std::collections::HashMap::new();
 	let mut continuation: bool = true;
 	while continuation {
-		continuation = interact(&organization);
+		continuation = interact(&mut organization);
 	}
 }
 
