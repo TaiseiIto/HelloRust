@@ -41,19 +41,24 @@ fn char2phoneme(c: char) -> Option<Phoneme> {
 	}
 }
 
+fn pig_latin_word(word: &str) -> String {
+	match word.chars().nth(0) {
+		Some(c) => match char2phoneme(c) {
+			Some(Phoneme::Vowel) => format!("{}{}", word.to_string(), "hay".to_string()),
+			Some(Phoneme::Consonant) => format!("{}{}{}", (&word[1..]).to_string(), c.to_string(), "ay".to_string()),
+			None => String::new(),
+		},
+		None => String::new(),
+	}
+}
+
 fn main() {
 	let mut text: String = String::new();
 	print!("Input some test : ");
     std::io::stdout().flush().unwrap();
 	std::io::stdin().read_line(&mut text).expect("Failed to read line");
-	let text: String = (&text[0..text.len() - 1]).to_string();
+	let text: String = (&text[..text.len() - 1]).to_string();
 	println!("text = \"{}\"", text);
-	let mut phonemes: Vec<Phoneme> = Vec::new();
-	for c in text.chars() {
-		if let Some(p) = char2phoneme(c) {
-			phonemes.push(p);
-		}
-	}
-	println!("phonemes = {:?}", phonemes);
+	println!("pig_latin_word(&text[..]) = \"{}\"", pig_latin_word(&text[..]));
 }
 
