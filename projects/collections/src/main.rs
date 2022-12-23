@@ -46,7 +46,7 @@ fn main() {
 	s3.push(c0);
 	println!("s3 = \"{}\"", s3);
 	println!("s4 = \"{}\"", s4);
-	let s1: String = s1 + &s2[..];
+	let s1: String = s1 + &*s2;
 	println!("s1 = \"{}\"", s1);
 	let s5: &str = "tic";
 	let s6: &str = "tac";

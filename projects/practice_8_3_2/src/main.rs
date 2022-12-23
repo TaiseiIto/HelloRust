@@ -55,7 +55,7 @@ fn pig_latin_word(word: &str) -> String {
 fn pig_latin(text: &str) -> String {
 	text
 		.split_whitespace()
-		.map(|word| pig_latin_word(&word[..]))
+		.map(|word| pig_latin_word(&*word))
 		.fold(String::new(), |sentence, word| format!("{} {}", sentence, word))[1..]
 		.to_string()
 }
@@ -67,6 +67,6 @@ fn main() {
 	std::io::stdin().read_line(&mut text).expect("Failed to read line");
 	let text: String = (&text[..text.len() - 1]).to_string();
 	println!("text = \"{}\"", text);
-	println!("pig_latin(&text[..]) = \"{}\"", pig_latin(&text[..]));
+	println!("pig_latin(&*text) = \"{}\"", pig_latin(&*text));
 }
 
