@@ -1,3 +1,12 @@
+fn count_words(text: &str) -> std::collections::HashMap<String, i32> {
+	let mut word_map: std::collections::HashMap<String, i32> = std::collections::HashMap::new();
+	for word in text.split_whitespace() {
+		let count: &mut i32 = word_map.entry(word.to_string()).or_insert(0);
+		*count += 1;
+	}
+	word_map
+}
+
 fn main() {
 	let v0: Vec<i32> = Vec::new();
     println!("v0 = {:?}", v0);
@@ -71,5 +80,9 @@ fn main() {
 	println!("scores = {:#?}", scores);
 	scores.insert("Blue".to_string(), 25);
 	println!("scores = {:#?}", scores);
+	scores.entry("Yellow".to_string()).or_insert(50);
+	scores.entry("Blue".to_string()).or_insert(50);
+	println!("scores = {:#?}", scores);
+	println!("count_words(\"hello world wonderful world\") = {:#?}", count_words("hello world wonderful world"));
 }
 
