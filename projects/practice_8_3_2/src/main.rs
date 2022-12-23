@@ -53,7 +53,8 @@ fn pig_latin_word(word: &str) -> String {
 }
 
 fn pig_latin(text: &str) -> String {
-	text.split_whitespace().collect::<Vec<&str>>().iter().map(|word| pig_latin_word(&word[..])).fold(String::new(), |sentence, word| format!("{} {}", sentence, word))
+	text
+		.split_whitespace().map(|word| pig_latin_word(&word[..])).fold(String::new(), |sentence, word| format!("{} {}", sentence, word))
 }
 
 fn main() {
