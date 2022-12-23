@@ -16,12 +16,20 @@ fn analyse_command(line: &str) -> Option<Command> {
 	}
 }
 
+fn execute_command(command: Command) {
+	match command {
+		Command::Quit => println!("quit"),
+	}
+}
+
 fn main() {
 	let mut command: String = String::new();
 	print!("manage employees > ");
 	std::io::stdout().flush().unwrap();
 	std::io::stdin().read_line(&mut command).expect("Failed to read line");
-	let command: Option<Command> = analyse_command(&command[..]);
-	println!("command = {:?}", command);
+	match analyse_command(&*command) {
+		Some(command) => execute_command(command),
+		None => main(),
+	}
 }
 
