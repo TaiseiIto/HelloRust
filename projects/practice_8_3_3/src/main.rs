@@ -22,6 +22,10 @@ fn analyse_command(line: &str) -> Option<Command> {
 				},
 				None => None,
 			},
+			"list" => match words.next() {
+				Some(department) => Some(Command::List {department: Some(department.to_string())}),
+				None => Some(Command::List {department: None}),
+			}
 			"quit" => Some(Command::Quit),
 			_ => None,
 		},
