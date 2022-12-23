@@ -3,6 +3,7 @@ use std::io::Write;
 #[derive(Debug)]
 enum Command {
 	Add {employee: String, department: String},
+	List {department: Option<String>},
 	Quit,
 }
 
@@ -30,8 +31,10 @@ fn analyse_command(line: &str) -> Option<Command> {
 
 fn execute_command(command: Command) {
 	match command {
-		Command::Quit => println!("quit"),
 		Command::Add {employee, department} => println!("Add {} to {}", employee, department),
+		Command::List {department: None} => println!("List employees of all departments"),
+		Command::List {department: Some(department)} => println!("List employees of {}", department),
+		Command::Quit => println!("quit"),
 	}
 }
 
