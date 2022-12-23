@@ -42,14 +42,19 @@ fn execute_command(command: Command) {
 	}
 }
 
-fn main() {
+fn interact(organization: &std::collections::HashMap<String, Vec<String>>) -> &std::collections::HashMap<String, Vec<String>> {
 	let mut command: String = String::new();
 	print!("manage employees > ");
 	std::io::stdout().flush().unwrap();
 	std::io::stdin().read_line(&mut command).expect("Failed to read line");
-	match analyse_command(&*command) {
-		Some(command) => execute_command(command),
-		None => main(),
+	if let Some(command) = analyse_command(&*command) {
+		execute_command(command);
 	}
+	organization
+}
+
+fn main() {
+	let organization: std::collections::HashMap<String, Vec<String>> = std::collections::HashMap::new();
+	interact(&organization);
 }
 
