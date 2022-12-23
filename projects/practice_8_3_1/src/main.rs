@@ -8,6 +8,12 @@ fn mean(sequence: &Vec<i8>) -> f64 {
 	sum as f64 / sequence.len() as f64
 }
 
+fn median(sequence: &Vec<i8>) -> i8 {
+	let mut sorted: Vec<i8> = sequence.clone();
+	sorted.sort();
+	sorted[sorted.len() / 2]
+}
+
 fn main() {
 	let mut rng = rand::thread_rng();
 	let mut sequence: Vec<i8> = Vec::new();
@@ -16,5 +22,6 @@ fn main() {
 	}
 	println!("sequence = {:?}", sequence);
 	println!("mean(sequence) = {:?}", mean(&sequence));
+	println!("median(sequence) = {:?}", median(&sequence));
 }
 
