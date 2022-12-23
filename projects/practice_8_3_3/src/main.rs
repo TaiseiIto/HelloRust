@@ -43,7 +43,6 @@ fn execute_command(command: Command, organization: &mut std::collections::HashMa
 		},
 		Command::List {department: None} => {
 			println!("List employees of all departments");
-			let organization: std::collections::HashMap<String, Vec<String>> = organization.clone();
 			let mut departments: Vec<&String> = organization.keys().collect::<Vec<&String>>();
 			departments.sort();
 			for department in departments {
