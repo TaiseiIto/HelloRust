@@ -33,7 +33,7 @@ fn analyse_command(line: &str) -> Option<Command> {
 	}
 }
 
-fn execute_command(command: Command, _: &std::collections::HashMap<String, Vec<String>>) -> bool {
+fn execute_command(command: Command, organization: &std::collections::HashMap<String, Vec<String>>) -> bool {
 	match command {
 		Command::Add {employee, department} => {
 			println!("Add {} to {}", employee, department);
@@ -41,10 +41,22 @@ fn execute_command(command: Command, _: &std::collections::HashMap<String, Vec<S
 		},
 		Command::List {department: None} => {
 			println!("List employees of all departments");
+			let mut departments: Vec<&String> = organization.keys().collect::<Vec<&String>>();
+			departments.sort();
+			for department in departments {
+				execute_command(Command::List {department: Some(department.to_string())}, organization);
+			}
 			true
 		},
 		Command::List {department: Some(department)} => {
 			println!("List employees of {}", department);
+			if let Some(employees) = organization.get(&department) {
+				let mut employees: Vec<String> = employees.clone();
+				employees.sort();
+				for employee in employees {
+					println!("\t{}", employee);
+				}
+			}
 			true
 		},
 		Command::Quit => {
