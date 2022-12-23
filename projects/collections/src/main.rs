@@ -22,5 +22,35 @@ fn main() {
 		*i += 10;
 	}
     println!("v2 = {:?}", v2);
+	let s0: String = String::new();
+	println!("s0 = \"{}\"", s0);
+	let s1: String = "initial contents".to_string();
+	println!("s1 = \"{}\"", s1);
+	let s2: String = String::from("initial contents");
+	println!("s2 = \"{}\"", s2);
+	let mut s3: String = "foo".to_string();
+	let s4: &str = "bar";
+	println!("s3 = \"{}\"", s3);
+	s3.push_str(s4);
+	println!("s3 = \"{}\"", s3);
+	let c0: char = 'l';
+	s3.push(c0);
+	println!("s3 = \"{}\"", s3);
+	println!("s4 = \"{}\"", s4);
+	let s1: String = s1 + &s2[..];
+	println!("s1 = \"{}\"", s1);
+	let s5: &str = "tic";
+	let s6: &str = "tac";
+	let s7: &str = "toe";
+	let s8: String = s5.to_string() + "-" + s6 + "-" + s7;
+	println!("s8 = \"{}\"", s8);
+	let s9: String = format!("{}-{}-{}", s5, s6, s7);
+	println!("s9 = \"{}\"", s9);
+	for c in "hello".chars() {
+		println!("{}", c);
+	}
+	for c in "hello".bytes() {
+		println!("{}", c);
+	}
 }
 
