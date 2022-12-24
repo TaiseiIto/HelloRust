@@ -74,16 +74,24 @@ impl Summary for Tweet {
 	}
 }
 
+fn notify(item: &impl Summary) -> String {
+	format!("Breaking news! {}", item.summarize())
+}
+
 fn main() {
 	let news_article: NewsArticle = NewsArticle::new("Hello", "World", "Taisei", "lol");
 	let summary: String = news_article.summarize();
 	let search_by_author: String = news_article.search_by_author();
+	let notification: String = notify(&news_article);
 	println!("{}", summary);
 	println!("{}", search_by_author);
+	println!("{}", notification);
 	let tweet = Tweet::new("Taisei", "lol", true, false);
 	let summary: String = tweet.summarize();
 	let search_by_author: String = tweet.search_by_author();
+	let notification: String = notify(&tweet);
 	println!("{}", summary);
 	println!("{}", search_by_author);
+	println!("{}", notification);
 }
 
