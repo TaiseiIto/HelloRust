@@ -1,10 +1,8 @@
 use std::io::Read;
 
 fn read_username_from_file() -> Result<String, std::io::Error> {
-	let file_name: &str = "hello.txt";
-	let mut file: std::fs::File = std::fs::File::open(file_name)?;
 	let mut username: String = String::new();
-	file.read_to_string(&mut username)?;
+	std::fs::File::open("hello.txt")?.read_to_string(&mut username)?;
 	Ok(username)
 }
 
