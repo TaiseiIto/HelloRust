@@ -1,7 +1,7 @@
-fn largest(numbers: &Vec<i32>) -> Result<i32, ()> {
+fn largest<T: PartialOrd + Copy>(numbers: &Vec<T>) -> Result<T, ()> {
 	match numbers.get(0) {
 		Some(number) => {
-			let mut largest: i32 = *number;
+			let mut largest: T = *number;
 			for number in numbers {
 				if largest < *number {
 					largest = *number;
