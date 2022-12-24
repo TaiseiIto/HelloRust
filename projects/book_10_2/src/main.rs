@@ -1,5 +1,9 @@
 trait Summary {
+	fn author(&self) -> String;
 	fn summarize(&self) -> String;
+	fn search_by_author(&self) ->String {
+		format!("Read more from {}", self.author())
+	}
 }
 
 #[derive(Debug)]
@@ -22,6 +26,9 @@ impl NewsArticle {
 }
 
 impl Summary for NewsArticle {
+	fn author(&self) -> String {
+		self.author.clone()
+	}
 	fn summarize(&self) -> String {
 		format!("{}, by {} ({}) : {}", self.headline, self.author, self.location, self.content)
 	}
@@ -47,6 +54,9 @@ impl Tweet {
 }
 
 impl Summary for Tweet {
+	fn author(&self) -> String {
+		self.username.clone()
+	}
 	fn summarize(&self) -> String {
 		format!(
 			"{}{}{} by {}",
@@ -67,9 +77,13 @@ impl Summary for Tweet {
 fn main() {
 	let news_article: NewsArticle = NewsArticle::new("Hello", "World", "Taisei", "lol");
 	let summary: String = news_article.summarize();
+	let search_by_author: String = news_article.search_by_author();
 	println!("{}", summary);
+	println!("{}", search_by_author);
 	let tweet = Tweet::new("Taisei", "lol", true, false);
 	let summary: String = tweet.summarize();
+	let search_by_author: String = tweet.search_by_author();
 	println!("{}", summary);
+	println!("{}", search_by_author);
 }
 
