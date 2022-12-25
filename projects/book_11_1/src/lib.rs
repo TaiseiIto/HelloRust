@@ -26,6 +26,26 @@ pub fn greet(name: &str) -> String {
 	format!("Hello, {}", name)
 }
 
+pub struct Guess {
+	value: i32,
+}
+
+impl Guess {
+	pub fn new(value: i32) -> Guess {
+		if 1 <= value && value <= 100 {
+			Guess {
+				value
+			}
+		} else {
+			panic!("Guess value must be between 1 and 100, got {}.", value);
+		}
+	}
+
+	pub fn get_value(&self) -> i32 {
+		self.value
+	}
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -64,6 +84,12 @@ mod tests {
 			greeting,
 			name
 		);
+	}
+
+	#[test]
+	#[should_panic]
+	fn greater_than_100() {
+		Guess::new(200);
 	}
 }
 
