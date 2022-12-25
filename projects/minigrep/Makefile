@@ -4,7 +4,7 @@ RELEASE = target/release/$(PROJECT)
 SOURCE = $(shell find src | grep '^.*\.rs$$')
 
 all: $(RELEASE)
-	./target/release/$(PROJECT)
+	./target/release/$(PROJECT) test sample.txt
 
 build: $(DEBUG)
 
