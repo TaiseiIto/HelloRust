@@ -6,19 +6,19 @@ struct Config {
 }
 
 impl Config {
-	fn new(args: &mut std::env::Args) -> Config {
-		args.next().expect("There is no program name.");
-		let query: String = args.next().expect("There is no query.");
-		let file_name: String = args.next().expect("There is no file name.");
-		Config {
-			query,
-			file_name
-		}
+	fn new(args: &mut std::env::Args) -> Result<Config, &'static str> {
+		args.next().ok_or("There is no program name.")?;
+		let query: String = args.next().ok_or("There is no query.")?;
+		let file_name: String = args.next().ok_or("There is no file name.")?;
+		Ok(Config{query, file_name})
 	}
 }
 
 fn main() {
-	let config: Config = Config::new(&mut std::env::args());
+	let config: Config = Config::new(&mut std::env::args()).unwrap_or_else(|error| {
+		println!("Error while parsing arguments: {}", error);
+		std::process::exit(1);
+	});
 	println!("query = \"{}\"", config.query);
 	println!("file_name = \"{}\"", config.file_name);
 	let file_name: &str = &config.file_name;
