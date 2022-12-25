@@ -19,6 +19,9 @@ rebuild: clean
 run:
 	cargo run
 
+test:
+	cargo test
+
 $(RELEASE): $(SOURCE)
 	cargo build --release
 
