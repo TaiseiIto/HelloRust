@@ -5,18 +5,20 @@ struct Config {
 	file_name: String,
 }
 
-fn parse_config(args: &mut std::env::Args) -> Config {
-	args.next().expect("There is no program name.");
-	let query: String = args.next().expect("There is no query.");
-	let file_name: String = args.next().expect("There is no file name.");
-	Config {
-		query,
-		file_name
+impl Config {
+	fn new(args: &mut std::env::Args) -> Config {
+		args.next().expect("There is no program name.");
+		let query: String = args.next().expect("There is no query.");
+		let file_name: String = args.next().expect("There is no file name.");
+		Config {
+			query,
+			file_name
+		}
 	}
 }
 
 fn main() {
-	let config: Config = parse_config(&mut std::env::args());
+	let config: Config = Config::new(&mut std::env::args());
 	println!("query = \"{}\"", config.query);
 	println!("file_name = \"{}\"", config.file_name);
 	let file_name: &str = &config.file_name;
