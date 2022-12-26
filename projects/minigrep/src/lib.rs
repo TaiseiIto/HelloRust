@@ -3,6 +3,7 @@ use std::io::prelude::*;
 pub struct Config {
 	query: String,
 	file_name: String,
+	case_sensitive: bool,
 }
 
 impl Config {
@@ -10,7 +11,12 @@ impl Config {
 		args.next().ok_or("There is no program name.")?;
 		let query: String = args.next().ok_or("There is no query.")?;
 		let file_name: String = args.next().ok_or("There is no file name.")?;
-		Ok(Config{query, file_name})
+		let case_sensitive: bool = std::env::var("CASE_INSENSITIVE").is_err();
+		Ok(Config{
+			query,
+			file_name,
+			case_sensitive,
+		})
 	}
 }
 
@@ -29,7 +35,10 @@ pub fn run(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
 	let mut contents: String = String::new();
 	file.read_to_string(&mut contents)?;
     let contents: &str = &contents;
-    let matched_lines: String = search(query, contents).join("\n");
+    let matched_lines: String = match config.case_sensitive {
+		true => search,
+		false => search_case_insensitive,
+	}(query, contents).join("\n");
 	println!("{}", matched_lines);
 	Ok(())
 }
