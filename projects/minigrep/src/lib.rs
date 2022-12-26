@@ -18,6 +18,10 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
 	contents.lines().filter(|line| line.contains(query)).collect()
 }
 
+pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+	contents.lines().filter(|line| line.to_lowercase().contains(&query.to_lowercase())).collect()
+}
+
 pub fn run(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
 	let file_name: &str = &config.file_name;
     let query: &str = &config.query;
@@ -33,15 +37,29 @@ pub fn run(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
 #[cfg(test)]
 mod test {
 	#[test]
-	fn one_result() {
+	fn case_sensitive() {
 		let query: &str = "duct";
 		let contents_lines: Vec<&str> = vec![
 			"Rust:",
 			"safe, fast, productive.",
 			"Pick three.",
+			"Duct tape.",
 		];
-		let contents: &str = &contents_lines.iter().fold("".to_string(), |lines, line| format!("{}\n{}", lines, line));
+		let contents: &str = &contents_lines.join("\n");
 		assert_eq!(vec![contents_lines[1]], super::search(query, contents));
+	}
+
+	#[test]
+	fn case_insensitive() {
+		let query: &str = "rUsT";
+		let contents_lines: Vec<&str> = vec![
+			"Rust:",
+			"safe, fast, productive.",
+			"Pick three.",
+			"Trust me.",
+		];
+		let contents: &str = &contents_lines.join("\n");
+		assert_eq!(vec![contents_lines[0], contents_lines[3]], super::search_case_insensitive(query, contents));
 	}
 }
 
