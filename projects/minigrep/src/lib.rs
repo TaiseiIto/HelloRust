@@ -14,16 +14,20 @@ impl Config {
 	}
 }
 
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+	contents.lines().filter(|line| line.contains(query)).collect()
+}
+
 pub fn run(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
 	let file_name: &str = &config.file_name;
+    let query: &str = &config.query;
 	let mut file: std::fs::File = std::fs::File::open(&file_name)?;
 	let mut contents: String = String::new();
 	file.read_to_string(&mut contents)?;
+    let contents: &str = &contents;
+    let matched_lines: String = search(query, contents).join("\n");
+	println!("{}", matched_lines);
 	Ok(())
-}
-
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-	contents.lines().filter(|line| line.contains(query)).collect()
 }
 
 #[cfg(test)]
