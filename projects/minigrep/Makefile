@@ -6,7 +6,9 @@ GREP_TARGET = poem.txt
 QUERIES = frog body monomorphization
 
 all: $(RELEASE)
-	for q in $(QUERIES); do ./target/release/$(PROJECT) $$q $(GREP_TARGET); done
+	for q in $(QUERIES); do \
+		./target/release/$(PROJECT) $$q $(GREP_TARGET); \
+	done
 
 build: $(DEBUG)
 
