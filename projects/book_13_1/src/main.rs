@@ -1,9 +1,9 @@
-struct Cacher<T, U> where T: Eq + std::hash::Hash {
+struct Cacher<T, U> where T: Clone + Eq + std::hash::Hash, U: Clone {
 	calculate: fn(T) -> U,
 	cache: std::collections::HashMap<T, U>,
 }
 
-impl<T, U> Cacher<T, U> where T: Eq + std::hash::Hash {
+impl<T, U> Cacher<T, U> where T: Clone + Eq + std::hash::Hash, U: Clone {
 	fn new(calculate: fn(T) -> U) -> Cacher<T, U> {
 		Cacher {
 			calculate,
@@ -11,11 +11,11 @@ impl<T, U> Cacher<T, U> where T: Eq + std::hash::Hash {
 		}
 	}
 
-	fn get(self: &mut Self, arg: &T) -> U where T: Copy, U: Copy {
+	fn get(self: &mut Self, arg: &T) -> U {
 		match self.cache.get(arg) {
-			Some(result) => *result,
+			Some(result) => result.clone(),
 			None => {
-				self.cache.insert(*arg, (self.calculate)(*arg));
+				self.cache.insert(arg.clone(), (self.calculate)(arg.clone()));
 				self.get(arg)
 			}
 		}
