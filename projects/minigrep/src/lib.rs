@@ -8,9 +8,9 @@ pub struct Config {
 
 impl Config {
 	pub fn new(args: &mut std::env::Args) -> Result<Config, &'static str> {
-		args.next().ok_or("There is no program name.")?;
-		let query: String = args.next().ok_or("There is no query.")?;
+		let mut args: std::iter::Rev<&mut std::env::Args> = args.rev();
 		let file_name: String = args.next().ok_or("There is no file name.")?;
+		let query: String = args.next().ok_or("There is no query.")?;
 		let case_sensitive: bool = std::env::var("CASE_INSENSITIVE").is_err();
 		Ok(Config{
 			query,
