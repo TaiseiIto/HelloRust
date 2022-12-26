@@ -11,7 +11,20 @@ impl Config {
 		let mut args: std::iter::Rev<&mut std::env::Args> = args.rev();
 		let file_name: String = args.next().ok_or("There is no file name.")?;
 		let query: String = args.next().ok_or("There is no query.")?;
-		let case_sensitive: bool = std::env::var("CASE_INSENSITIVE").is_err();
+		let mut case_sensitive: bool = std::env::var("CASE_INSENSITIVE").is_err();
+		for arg in args {
+			let arg: Vec<char> = arg.chars().collect::<Vec<char>>();
+			let mut arg_iter: std::slice::Iter<char> = arg.iter();
+			match arg_iter.next() {
+				Some('-') => match arg_iter.next() {
+					Some('i') => case_sensitive = false,
+					Some(_) => (),
+					None => (),
+				},
+				Some(_) => (),
+				None => (),
+			}
+		}
 		Ok(Config{
 			query,
 			file_name,
