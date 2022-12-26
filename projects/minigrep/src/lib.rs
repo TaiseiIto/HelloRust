@@ -15,14 +15,29 @@ impl Config {
 }
 
 pub fn run(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
-	println!("query = \"{}\"", config.query);
-	println!("file_name = \"{}\"", config.file_name);
 	let file_name: &str = &config.file_name;
 	let mut file: std::fs::File = std::fs::File::open(&file_name)?;
 	let mut contents: String = String::new();
 	file.read_to_string(&mut contents)?;
-	println!("Contents of \"{}\"", file_name);
-	println!("{}", contents);
 	Ok(())
+}
+
+pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+	contents.lines().filter(|line| line.contains(query)).collect()
+}
+
+#[cfg(test)]
+mod test {
+	#[test]
+	fn one_result() {
+		let query: &str = "duct";
+		let contents_lines: Vec<&str> = vec![
+			"Rust:",
+			"safe, fast, productive.",
+			"Pick three.",
+		];
+		let contents: &str = &contents_lines.iter().fold("".to_string(), |lines, line| format!("{}\n{}", lines, line));
+		assert_eq!(vec![contents_lines[1]], super::search(query, contents));
+	}
 }
 
