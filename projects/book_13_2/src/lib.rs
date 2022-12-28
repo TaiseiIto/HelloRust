@@ -14,5 +14,10 @@ mod tests {
 	fn iterator_sum() {
 		assert_eq!(vec![1, 2, 3].iter().sum::<i32>(), 6);
 	}
+
+	#[test]
+	fn iterator_map() {
+		assert_eq!(vec![1, 2, 3].iter().map(|x| x + 1).collect::<Vec<i32>>(), vec![2, 3, 4]);
+	}
 }
 
