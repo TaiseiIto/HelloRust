@@ -1,7 +1,7 @@
 extern crate minigrep;
 
 fn main() {
-	let config: minigrep::Config = minigrep::Config::new(&mut std::env::args()).unwrap_or_else(|error| {
+	let config: minigrep::Config = minigrep::Config::new(std::env::args()).unwrap_or_else(|error| {
 		eprintln!("Error while parsing arguments: {}", error);
 		std::process::exit(1);
 	});
