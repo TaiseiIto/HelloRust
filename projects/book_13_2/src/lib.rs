@@ -8,6 +8,31 @@ pub fn shoes_in_my_size(shoes: Vec<Shoe>, my_shoe_size: u32) -> Vec<Shoe> {
 	shoes.into_iter().filter(|shoe| shoe.size == my_shoe_size).collect()
 }
 
+pub struct Counter {
+	count: u32,
+}
+
+impl Counter {
+	pub fn new() -> Counter {
+		Counter {
+			count: 0,
+		}
+	}
+}
+
+impl Iterator for Counter {
+	type Item = u32;
+
+	fn next(self: &mut Self) -> Option<Self::Item> {
+		self.count += 1;
+		if self.count < 6 {
+			Some(self.count)
+		} else {
+			None
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	#[test]
@@ -57,6 +82,22 @@ mod tests {
 				style: "boot".to_string(),
 			},
 		]);
+	}
+
+	#[test]
+	fn call_next_directly() {
+		let mut counter: super::Counter = super::Counter::new();
+		assert_eq!(counter.next(), Some(1));
+		assert_eq!(counter.next(), Some(2));
+		assert_eq!(counter.next(), Some(3));
+		assert_eq!(counter.next(), Some(4));
+		assert_eq!(counter.next(), Some(5));
+		assert_eq!(counter.next(), None);
+	}
+
+	#[test]
+	fn use_other_iterator_trait_methods() {
+		assert_eq!(super::Counter::new().zip(super::Counter::new().skip(1)).map(|(a, b)| a * b).filter(|x| x % 3 == 0).sum::<u32>(), 18);
 	}
 }
 
