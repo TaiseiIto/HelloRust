@@ -35,6 +35,6 @@ cat gitconfig >> /root/.gitconfig
 cat ../ssh/config >> /root/.ssh/config
 chmod 600 ../ssh/github
 chmod -R 600 /root/.gnupg
-cargo login $(cat ../crates.io/key)
+/root/.cargo/bin/cargo login $(cat ../crates.io/key)
 cd $currentdir
 
