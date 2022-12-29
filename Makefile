@@ -28,10 +28,11 @@ devenv:
 	$(SCRIPT_PREFIX)script$(DELIMITER)devenv$(SCRIPT_SUFFIX) $(DOCKER) $(DOCKER_IMAGE) $(DOCKER_IMAGE_TAG) $(DOCKER_CONTAINER)
 
 # Only the developer can execute it.
-# usage : $ make gitconfig KEY=<GitHub private key path> GPG=<.gnupg path>
+# usage : $ make gitconfig KEY=<GitHub private key path> GPG=<.gnupg path> CRATESIO=<crates.io API token path>
 gitconfig:
 	$(DOCKER) cp $(KEY) $(DOCKER_CONTAINER):/root/HelloRust/ssh/github && \
 	$(DOCKER) cp $(GPG) $(DOCKER_CONTAINER):/root/.gnupg && \
+	$(DOCKER) cp $(CRATESIO) $(DOCKER_CONTAINER):/root/HelloRust/crates.io/key && \
 	$(DOCKER) start $(DOCKER_CONTAINER)
 	$(DOCKER) exec -it $(DOCKER_CONTAINER) /root/HelloRust/git/gitconfig.sh
 	$(DOCKER) stop $(DOCKER_CONTAINER)
