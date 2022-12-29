@@ -1,14 +1,19 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+/// It adds one to the number given.
+/// 
+/// # Examples
+///
+/// '''
+/// assert_eq(add_one(0), 1);
+/// '''
+pub fn add_one(x: i32) -> i32 {
+	x + 1
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+mod test {
+	#[test]
+	fn add_one() {
+		assert_eq!(super::add_one(0), 1);
+	}
 }
+
