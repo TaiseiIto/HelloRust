@@ -2,9 +2,9 @@
 /// 
 /// # Examples
 ///
-/// '''
-/// assert_eq(add_one(0), 1);
-/// '''
+/// ```
+/// assert_eq!(book_14_2::add_one(0), 1);
+/// ```
 pub fn add_one(x: i32) -> i32 {
 	x + 1
 }
