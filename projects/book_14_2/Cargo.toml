@@ -1,8 +1,12 @@
 [package]
-name = "book_14_2"
+name = "taisei_ito_book_14_2"
 version = "0.1.0"
 edition = "2021"
+authors = ["Taisei Ito"]
+description = "Practice of https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html"
+license = "MIT OR Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
