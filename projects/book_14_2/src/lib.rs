@@ -1,3 +1,7 @@
+//! # book_14_2
+//!
+//! 'book_14_2' is a practice of [this section](https://doc.rust-jp.rs/book-ja/ch14-02-publishing-to-crates-io.html).
+
 /// It adds one to the number given.
 /// 
 /// # Examples
