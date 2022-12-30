@@ -47,7 +47,13 @@ impl<T> Node<T> {
 fn main() {
 	let leaf: std::rc::Rc<Node<VisibleDrop<i32>>> = Node::new_leaf(VisibleDrop::new(3));
 	println!("leaf parent = {:#?}", leaf.parent.borrow().upgrade());
+	println!("leaf strong count = {}", std::rc::Rc::strong_count(&leaf));
+	println!("leaf weak count = {}", std::rc::Rc::weak_count(&leaf));
 	let branch: std::rc::Rc<Node<VisibleDrop<i32>>> = Node::add_parent(VisibleDrop::new(5), &leaf);
 	println!("leaf parent = {:#?}", leaf.parent.borrow().upgrade());
+	println!("branch strong count = {}", std::rc::Rc::strong_count(&branch));
+	println!("branch weak count = {}", std::rc::Rc::weak_count(&branch));
+	println!("leaf strong count = {}", std::rc::Rc::strong_count(&leaf));
+	println!("leaf weak count = {}", std::rc::Rc::weak_count(&leaf));
 }
 
