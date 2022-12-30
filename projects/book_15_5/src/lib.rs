@@ -30,3 +30,32 @@ impl<'a, T> LimitTracker<'a, T> where T: Messenger {
 	}
 }
 
+#[cfg(test)]
+mod test {
+	struct MockMessenger {
+		sent_messages: Vec<String>,
+	}
+
+	impl MockMessenger {
+		fn new() -> MockMessenger {
+			MockMessenger {
+				sent_messages: vec![],
+			}
+		}
+	}
+
+	impl super::Messenger for MockMessenger {
+		fn send(&self, message: &str) {
+			self.sent_messages.push(message.to_string());
+		}
+	}
+
+	#[test]
+	fn it_sends_an_over_75_percent_warning_message() {
+		let mock_messenger = MockMessenger::new();
+		let mut limit_tracker = super::LimitTracker::new(&mock_messenger, 100);
+		limit_tracker.set_value(80);
+		assert_eq!(mock_messenger.sent_messages, vec!["Warning: You've used up over 75% of your quota!"]);
+	}
+}
+
