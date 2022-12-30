@@ -32,14 +32,15 @@ impl<T> List<T> {
 fn main() {
 	let a: std::cell::RefCell<std::rc::Rc<List<i32>>> = List::new(vec![5]);
 	println!("a = {:#?}", a);
+	println!("a rc count = {}", std::rc::Rc::strong_count(&a.borrow()));
 	let b: std::cell::RefCell<std::rc::Rc<List<i32>>> = List::cons_branch(&a, 10);
 	println!("b = {:#?}", b);
-	println!("b rc count = {}", std::rc::Rc::strong_count(&b.borrow()));
 	println!("a rc count = {}", std::rc::Rc::strong_count(&a.borrow()));
+	println!("b rc count = {}", std::rc::Rc::strong_count(&b.borrow()));
 	if let Some(link) = a.borrow().tail() {
 		*link.borrow_mut() = std::rc::Rc::clone(&b.borrow());
 	};
-	println!("b rc count = {}", std::rc::Rc::strong_count(&b.borrow()));
 	println!("a rc count = {}", std::rc::Rc::strong_count(&a.borrow()));
+	println!("b rc count = {}", std::rc::Rc::strong_count(&b.borrow()));
 }
 
