@@ -19,7 +19,11 @@ impl<T> List<T> {
 }
 
 fn main() {
-	let a: List<i32> = List::new(vec![5, 10]);
+	let a: std::rc::Rc<List<i32>> = std::rc::Rc::new(List::new(vec![5, 10]));
 	println!("a = {:#?}", a);
+	let b: List<i32> = List::Cons(3, std::rc::Rc::clone(&a));
+	println!("b = {:#?}", b);
+	let c: List<i32> = List::Cons(4, std::rc::Rc::clone(&a));
+	println!("c = {:#?}", c);
 }
 
