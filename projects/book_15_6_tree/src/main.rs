@@ -1,4 +1,23 @@
 #[derive(Debug)]
+struct VisibleDrop<T> where T: std::fmt::Debug {
+	x: T,
+}
+
+impl<T> VisibleDrop<T> where T: std::fmt::Debug {
+	fn new(x: T) -> Self {
+		VisibleDrop {
+			x,
+		}
+	}
+}
+
+impl<T> Drop for VisibleDrop<T> where T: std::fmt::Debug {
+	fn drop(self: &mut Self) {
+		println!("Drop {:#?}!!!", self.x);
+	}
+}
+
+#[derive(Debug)]
 struct Node<T> {
 	value: T,
 	parent: std::cell::RefCell<std::rc::Weak<Node<T>>>,
@@ -26,8 +45,8 @@ impl<T> Node<T> {
 }
 
 fn main() {
-	let leaf: std::rc::Rc<Node<i32>> = Node::new_leaf(3);
-	let branch: std::rc::Rc<Node<i32>> = Node::add_parent(5, &leaf);
+	let leaf: std::rc::Rc<Node<VisibleDrop<i32>>> = Node::new_leaf(VisibleDrop::new(3));
+	let branch: std::rc::Rc<Node<VisibleDrop<i32>>> = Node::add_parent(VisibleDrop::new(5), &leaf);
 	println!("leaf = {:#?}", leaf);
 	println!("branch = {:#?}", branch);
 }
