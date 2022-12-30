@@ -13,15 +13,21 @@ impl<T> Node<T> {
 			children: std::cell::RefCell::new(vec![]),
 		})
 	}
+
+	fn add_parent(parent: T, child: &std::rc::Rc<Self>) -> std::rc::Rc<Self> {
+		let parent_tree: std::rc::Rc<Self> = std::rc::Rc::new(Self {
+			value: parent,
+			parent: std::cell::RefCell::new(std::rc::Weak::new()),
+			children: std::cell::RefCell::new(vec![std::rc::Rc::clone(child)]),
+		});
+		*child.parent.borrow_mut() = std::rc::Rc::downgrade(&parent_tree);
+		parent_tree
+	}
 }
 
 fn main() {
 	let leaf: std::rc::Rc<Node<i32>> = Node::new_leaf(3);
-	let branch: std::rc::Rc<Node<i32>> = std::rc::Rc::new(Node {
-		value: 5,
-		parent: std::cell::RefCell::new(std::rc::Weak::new()),
-		children: std::cell::RefCell::new(vec![std::rc::Rc::clone(&leaf)]),
-	});
+	let branch: std::rc::Rc<Node<i32>> = Node::add_parent(5, &leaf);
 	println!("leaf = {:#?}", leaf);
 	println!("branch = {:#?}", branch);
 }
