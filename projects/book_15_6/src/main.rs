@@ -9,6 +9,10 @@ impl<T> List<T> {
 		std::cell::RefCell::new(std::rc::Rc::new(Self::Cons(x, list)))
 	}
 
+	fn cons_branch(list: &std::cell::RefCell<std::rc::Rc<List<T>>>, x: T) -> std::cell::RefCell<std::rc::Rc<List<T>>> {
+		std::cell::RefCell::new(std::rc::Rc::new(Self::Cons(x, std::cell::RefCell::new(std::rc::Rc::clone(&list.borrow())))))
+	}
+
 	fn new(v: Vec<T>) -> std::cell::RefCell<std::rc::Rc<List<T>>> {
 		let mut list: std::cell::RefCell<std::rc::Rc<List<T>>> = std::cell::RefCell::new(std::rc::Rc::new(Self::Nil));
 		for x in v.into_iter().rev() {
