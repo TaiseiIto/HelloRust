@@ -33,20 +33,20 @@ impl<'a, T> LimitTracker<'a, T> where T: Messenger {
 #[cfg(test)]
 mod test {
 	struct MockMessenger {
-		sent_messages: Vec<String>,
+		sent_messages: std::cell::RefCell<Vec<String>>,
 	}
 
 	impl MockMessenger {
 		fn new() -> MockMessenger {
 			MockMessenger {
-				sent_messages: vec![],
+				sent_messages: std::cell::RefCell::new(vec![]),
 			}
 		}
 	}
 
 	impl super::Messenger for MockMessenger {
 		fn send(&self, message: &str) {
-			self.sent_messages.push(message.to_string());
+			self.sent_messages.borrow_mut().push(message.to_string());
 		}
 	}
 
@@ -55,7 +55,7 @@ mod test {
 		let mock_messenger = MockMessenger::new();
 		let mut limit_tracker = super::LimitTracker::new(&mock_messenger, 100);
 		limit_tracker.set_value(80);
-		assert_eq!(mock_messenger.sent_messages, vec!["Warning: You've used up over 75% of your quota!"]);
+		assert_eq!(*mock_messenger.sent_messages.borrow(), vec!["Warning: You've used up over 75% of your quota!".to_string()]);
 	}
 }
 
