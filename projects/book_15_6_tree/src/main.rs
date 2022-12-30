@@ -46,8 +46,8 @@ impl<T> Node<T> {
 
 fn main() {
 	let leaf: std::rc::Rc<Node<VisibleDrop<i32>>> = Node::new_leaf(VisibleDrop::new(3));
+	println!("leaf parent = {:#?}", leaf.parent.borrow().upgrade());
 	let branch: std::rc::Rc<Node<VisibleDrop<i32>>> = Node::add_parent(VisibleDrop::new(5), &leaf);
-	println!("leaf = {:#?}", leaf);
-	println!("branch = {:#?}", branch);
+	println!("leaf parent = {:#?}", leaf.parent.borrow().upgrade());
 }
 
