@@ -15,7 +15,9 @@ pub struct Screen {
 
 impl Screen {
 	pub fn run(&self) {
-		self.components.iter().map(|component| component.draw());
+		for component in &self.components {
+			component.draw();
+		}
 	}
 }
 
