@@ -3,7 +3,8 @@ DEBUG = target/debug/$(PROJECT)
 RELEASE = target/release/$(PROJECT)
 SOURCE = $(shell find src | grep '^.*\.rs$$')
 
-all: $(RELEASE) test
+all: $(RELEASE)
+	./target/release/$(PROJECT)
 
 build: $(DEBUG)
 
@@ -18,9 +19,6 @@ rebuild: clean
 
 run:
 	cargo run
-
-test:
-	cargo test
 
 $(RELEASE): $(SOURCE)
 	cargo build --release
