@@ -1,11 +1,11 @@
 fn main() {
-	let (tx, rx) = std::sync::mpsc::channel();
-	let thread: std::thread::JoinHandle<()> = std::thread::spawn(move || {
+	let (tx_a, rx) = std::sync::mpsc::channel();
+	let thread_a: std::thread::JoinHandle<()> = std::thread::spawn(move || {
 		let val: String = "hi".to_string();
-		tx.send(val).unwrap();
+		tx_a.send(val).unwrap();
 	});
 	let received: String = rx.recv().unwrap();
 	println!("Got: {}", received);
-	thread.join().unwrap();
+	thread_a.join().unwrap();
 }
 
