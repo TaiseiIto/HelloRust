@@ -3,8 +3,8 @@ trait State {
 
     fn approve(self: Box<Self>) -> Box<dyn State>;
 
-    fn content<'a>(&self, post: &'a Post) -> &'a str {
-        &post.content
+    fn content<'a>(&self, _: &'a Post) -> &'a str {
+        ""
     }
 }
 
@@ -25,6 +25,10 @@ impl State for Published {
 
     fn approve(self: Box<Published>) -> Box<dyn State> {
         self
+    }
+
+    fn content<'a>(&self, post: &'a Post) -> &'a str {
+        &post.content
     }
 }
 
