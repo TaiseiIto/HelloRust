@@ -19,11 +19,11 @@ impl Published {
 }
 
 impl State for Published {
-    fn request_review(self: Box<Published>) -> Box<dyn State> {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
         self
     }
 
-    fn approve(self: Box<Published>) -> Box<dyn State> {
+    fn approve(self: Box<Self>) -> Box<dyn State> {
         self
     }
 
@@ -43,11 +43,11 @@ impl PendingReview {
 }
 
 impl State for PendingReview {
-    fn request_review(self: Box<PendingReview>) -> Box<dyn State> {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
         self
     }
 
-    fn approve(self: Box<PendingReview>) -> Box<dyn State> {
+    fn approve(self: Box<Self>) -> Box<dyn State> {
         Box::new(Published::new())
     }
 }
@@ -56,11 +56,11 @@ struct Draft {
 }
 
 impl State for Draft {
-    fn request_review(self: Box<Draft>) -> Box<dyn State> {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
         Box::new(PendingReview::new())
     }
 
-    fn approve(self: Box<Draft>) -> Box<dyn State> {
+    fn approve(self: Box<Self>) -> Box<dyn State> {
         self
     }
 }
