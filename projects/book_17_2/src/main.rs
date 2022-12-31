@@ -15,5 +15,24 @@ impl Draw for SelectBox {
 }
 
 fn main() {
+	let screen = Screen {
+		components: vec![
+			Box::new(SelectBox {
+				width: 75,
+				height: 10,
+				options: [
+					"Yes",
+					"Maybe",
+					"No",
+				].iter().map(|x| x.to_string()).collect::<Vec<String>>(),
+			}),
+			Box::new(Button {
+				width: 50,
+				height: 10,
+				label: "OK".to_string(),
+			}),
+		],
+	};
+	screen.run();
 }
 
