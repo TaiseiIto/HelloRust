@@ -3,6 +3,10 @@ fn main() {
 	let q = Point::new(3, 4);
 	let r = p + q;
 	println!("r = {:?}", r);
+	println!("Meters(1.0) + Meters(1.0) = {:?}", Meters(1.0) + Meters(1.0));
+	println!("Meters(1.0) + Millimeters(1.0) = {:?}", Meters(1.0) + Millimeters(1.0));
+	println!("Millimeters(1.0) + Meters(1.0) = {:?}", Millimeters(1.0) + Meters(1.0));
+	println!("Millimeters(1.0) + Millimeters(1.0) = {:?}", Millimeters(1.0) + Millimeters(1.0));
 }
 
 #[derive(Debug)]
@@ -25,6 +29,44 @@ impl std::ops::Add for Point {
 			x: self.x + other.x,
 			y: self.y + other.y,
 		}
+	}
+}
+
+#[derive(Debug)]
+struct Meters(f64);
+
+impl std::ops::Add for Meters {
+	type Output = Self;
+
+	fn add(self, other: Self) -> Self {
+		Self(self.0 + other.0)
+	}
+}
+
+impl std::ops::Add<Millimeters> for Meters {
+	type Output = Self;
+
+	fn add(self, other: Millimeters) -> Self {
+		Self(self.0 + other.0 / 1000 as f64)
+	}
+}
+
+#[derive(Debug)]
+struct Millimeters(f64);
+
+impl std::ops::Add for Millimeters {
+	type Output = Self;
+
+	fn add(self, other: Self) -> Self {
+		Self(self.0 + other.0)
+	}
+}
+
+impl std::ops::Add<Meters> for Millimeters {
+	type Output = Self;
+
+	fn add(self, other: Meters) -> Self {
+		Self(self.0 + other.0 * 1000 as f64)
 	}
 }
 
