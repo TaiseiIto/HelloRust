@@ -7,6 +7,9 @@ fn main() {
 	println!("Meters(1.0) + Millimeters(1.0) = {:?}", Meters(1.0) + Millimeters(1.0));
 	println!("Millimeters(1.0) + Meters(1.0) = {:?}", Millimeters(1.0) + Meters(1.0));
 	println!("Millimeters(1.0) + Millimeters(1.0) = {:?}", Millimeters(1.0) + Millimeters(1.0));
+	Pilot::fly(&Human);
+	Wizard::fly(&Human);
+	Human.fly();
 }
 
 #[derive(Debug)]
@@ -67,6 +70,34 @@ impl std::ops::Add<Meters> for Millimeters {
 
 	fn add(self, other: Meters) -> Self {
 		Self(self.0 + other.0 * 1000 as f64)
+	}
+}
+
+trait Pilot {
+	fn fly(&self);
+}
+
+trait Wizard {
+	fn fly(&self);
+}
+
+struct Human;
+
+impl Human {
+	fn fly(&self) {
+		println!("Wave arm furiously.");
+	}
+}
+
+impl Pilot for Human {
+	fn fly(&self) {
+		println!("This is your captain speaking.");
+	}
+}
+
+impl Wizard for Human {
+	fn fly(&self) {
+		println!("Up!");
 	}
 }
 
