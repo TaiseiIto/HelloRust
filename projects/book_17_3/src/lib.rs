@@ -3,6 +3,10 @@ trait State {
     fn approve(self: Box<Self>) -> Box<dyn State>;
     fn reject(self: Box<Self>) -> Box<dyn State>;
 
+	fn is_addable(&self) -> bool {
+		false
+	}
+
     fn content<'a>(&self, _: &'a Post) -> &'a str {
         ""
     }
@@ -90,6 +94,10 @@ impl State for Draft {
     fn reject(self: Box<Self>) -> Box<dyn State> {
 		self
 	}
+
+	fn is_addable(&self) -> bool {
+		true
+	}
 }
 
 pub struct Post {
@@ -106,7 +114,11 @@ impl Post {
     }
 
     pub fn add_text(&mut self, text: &str) {
-        self.content.push_str(text);
+		if let Some(state) = &self.state {
+			if state.is_addable() {
+        		self.content.push_str(text);
+			}
+		}
     }
 
     pub fn content(&self) -> &str {
