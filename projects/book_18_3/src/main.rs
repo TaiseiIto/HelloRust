@@ -33,6 +33,11 @@ fn main() {
 	println!("match_part_of_struct(&p) = {}", match_part_of_struct(&p));
 	println!("match_part_of_struct(&q) = {}", match_part_of_struct(&q));
 	println!("match_part_of_struct(&r) = {}", match_part_of_struct(&r));
+	let ((feet, inches), Point{x, y}) = ((3, 10), Point{x: 3, y: -10});
+	println!("feet = {}", feet);
+	println!("inches = {}", inches);
+	println!("x = {}", x);
+	println!("y = {}", y);
 }
 
 fn match_literal(x: u32) -> &'static str {
