@@ -38,6 +38,9 @@ fn main() {
 	println!("inches = {}", inches);
 	println!("x = {}", x);
 	println!("y = {}", y);
+	match_first_and_last(vec![]);
+	match_first_and_last(vec![1]);
+	match_first_and_last(vec![1,2,3,4,5]);
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -104,3 +107,15 @@ fn match_part_of_struct(p: &Point) -> &'static str {
 		_ => "On neither axis"
 	}
 }
+
+fn match_first_and_last(list: Vec<i32>) {
+	match list[..] {
+		[] => println!("nothing"),
+		[x] => println!("only {}", x),
+		[first, .., last] => {
+			println!("first = {}", first);
+			println!("last = {}", last);
+		},
+	};
+}
+
