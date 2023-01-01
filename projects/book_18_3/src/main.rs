@@ -42,6 +42,9 @@ fn main() {
 	match_first_and_last(vec![1]);
 	match_first_and_last(vec![1,2,3,4,5]);
 	make_ref_in_match("Hello, World!".to_string());
+	println!("match_condition(4) = {}", match_condition(4));
+	println!("match_condition(5) = {}", match_condition(5));
+	println!("match_condition(6) = {}", match_condition(6));
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -125,5 +128,14 @@ fn make_ref_in_match(s: String) {
 		ref s => println!("s = {}", s),
 	}
 	println!("s = {}", s);
+}
+
+fn match_condition(x: i32) -> &'static str {
+	match x {
+		x if x < 5 => "less than 5.",
+		x if x == 5 => "equal to 5.",
+		x if 5 < x => "greater than 5.",
+		_ => "error",
+	}
 }
 
