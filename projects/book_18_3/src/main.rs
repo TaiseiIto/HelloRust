@@ -21,7 +21,18 @@ fn main() {
 		x: 0,
 		y: 7,
 	};
-	match_struct(p);
+	let q = Point {
+		x: 8,
+		y: 0,
+	};
+	let r = Point {
+		x: 9,
+		y: 7,
+	};
+	match_struct(&p);
+	println!("match_part_of_struct(&p) = {}", match_part_of_struct(&p));
+	println!("match_part_of_struct(&q) = {}", match_part_of_struct(&q));
+	println!("match_part_of_struct(&r) = {}", match_part_of_struct(&r));
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -71,7 +82,20 @@ struct Point {
 	y: i32,
 }
 
-fn match_struct(Point {x: a, y: b}: Point) {
-	println!("point ({}, {})", a, b);
+fn match_struct(&Point {x: a, y}: &Point) {
+	println!("point ({}, {})", a, y);
 }
 
+fn match_part_of_struct(p: &Point) -> &'static str {
+	match p {
+		Point {
+			x: 0,
+			y: _,
+		} => "On the y axix",
+		Point {
+			x: _,
+			y: 0,
+		} => "On the x axix",
+		_ => "On neither axis"
+	}
+}
