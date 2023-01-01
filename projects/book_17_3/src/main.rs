@@ -13,5 +13,7 @@ fn main() {
 	println!("post.content() = \"{}\"", post.content());
 	post.approve();
 	println!("post.content() = \"{}\"", post.content());
+	post.approve();
+	println!("post.content() = \"{}\"", post.content());
 }
 

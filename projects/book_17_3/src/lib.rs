@@ -37,11 +37,13 @@ impl State for Published {
 }
 
 struct PendingReview {
+	approved_times: u8,
 }
 
 impl PendingReview {
     fn new() -> Self {
         Self {
+			approved_times: 0,
         }
     }
 }
@@ -52,7 +54,13 @@ impl State for PendingReview {
     }
 
     fn approve(self: Box<Self>) -> Box<dyn State> {
-        Box::new(Published::new())
+		if self.approved_times == 0 {
+        	Box::new(Self {
+				approved_times: 1,
+			})
+		} else {
+        	Box::new(Published::new())
+		}
     }
 
     fn reject(self: Box<Self>) -> Box<dyn State> {
