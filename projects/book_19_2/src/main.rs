@@ -15,6 +15,7 @@ fn main() {
 	println!("A baby dog is called {}.", <Dog as Animal>::baby_name());
 	let w = Wrapper(["hello", "world"].into_iter().map(|s| s.to_string()).collect::<Vec<String>>());
 	println!("w = {}", w);
+	println!("*w = {:?}", *w);
 }
 
 #[derive(Debug)]
@@ -149,6 +150,14 @@ struct Wrapper(Vec<String>);
 impl std::fmt::Display for Wrapper {
 	fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
 		write!(f, "[{}]", self.0.join(", "))
+	}
+}
+
+impl std::ops::Deref for Wrapper {
+	type Target = Vec<String>;
+
+	fn deref(&self) -> &Vec<String> {
+		&self.0
 	}
 }
 
