@@ -8,10 +8,15 @@ fn main() {
 	println!("match_or(1) = {}", match_or(1));
 	println!("match_or(2) = {}", match_or(2));
 	println!("match_or(3) = {}", match_or(3));
-	println!("match_range(0) = {}", match_range(0));
-	println!("match_range(1) = {}", match_range(1));
-	println!("match_range(5) = {}", match_range(5));
-	println!("match_range(6) = {}", match_range(6));
+	println!("match_int_range(0) = {}", match_int_range(0));
+	println!("match_int_range(1) = {}", match_int_range(1));
+	println!("match_int_range(5) = {}", match_int_range(5));
+	println!("match_int_range(6) = {}", match_int_range(6));
+	println!("match_char_range('a') = {}", match_char_range('a'));
+	println!("match_char_range('j') = {}", match_char_range('j'));
+	println!("match_char_range('k') = {}", match_char_range('k'));
+	println!("match_char_range('z') = {}", match_char_range('z'));
+	println!("match_char_range('0') = {}", match_char_range('0'));
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -41,10 +46,18 @@ fn match_or(x: u32) -> &'static str {
 	}
 }
 
-fn match_range(x: i32) -> &'static str {
+fn match_int_range(x: i32) -> &'static str {
 	match x {
 		1..=5 => "one through five",
 		_ => "other",
+	}
+}
+
+fn match_char_range(c: char) -> &'static str {
+	match c {
+		'a'..='j' => "early ASCII letter",
+		'k'..='z' => "late ASCII letter",
+		_ => "something else",
 	}
 }
 
