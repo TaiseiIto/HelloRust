@@ -1,3 +1,7 @@
+extern "C" {
+	fn abs(i: i32) -> i32;
+}
+
 fn main() {
 	let mut num: i32 = 5;
 	let immutable_pointer = &num as *const i32;
@@ -11,6 +15,10 @@ fn main() {
 	let (a, b) = split_at_mut(&mut v[..], 3);
 	println!("a = {:?}", a);
 	println!("b = {:?}", b);
+	unsafe {
+		println!("abs(3) = {}", abs(3));
+		println!("abs(-3) = {}", abs(-3));
+	}
 }
 
 fn split_at_mut(slice: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
