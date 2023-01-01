@@ -3,6 +3,7 @@ fn main() {
 	let q = Point::new(3, 4);
 	let r = p + q;
 	println!("r = {:?}", r);
+	r.outline_print();
 	println!("Meters(1.0) + Meters(1.0) = {:?}", Meters(1.0) + Meters(1.0));
 	println!("Meters(1.0) + Millimeters(1.0) = {:?}", Meters(1.0) + Millimeters(1.0));
 	println!("Millimeters(1.0) + Meters(1.0) = {:?}", Millimeters(1.0) + Meters(1.0));
@@ -36,6 +37,14 @@ impl std::ops::Add for Point {
 		}
 	}
 }
+
+impl std::fmt::Display for Point {
+	fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+		write!(f, "({}, {})", self.x, self.y)
+	}
+}
+
+impl OutlinePrint for Point {}
 
 #[derive(Debug)]
 struct Meters(f64);
@@ -118,6 +127,18 @@ impl Dog {
 impl Animal for Dog {
 	fn baby_name() -> String {
 		"puppy".to_string()
+	}
+}
+
+trait OutlinePrint: std::fmt::Display {
+	fn outline_print(&self) {
+		let output = self.to_string();
+		let len = output.len();
+		println!("{}", "*".repeat(len + 4));
+		println!("*{}*", " ".repeat(len + 2));
+		println!("* {} *", output);
+		println!("*{}*", " ".repeat(len + 2));
+		println!("{}", "*".repeat(len + 4));
 	}
 }
 
