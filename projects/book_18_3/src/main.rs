@@ -45,6 +45,10 @@ fn main() {
 	println!("match_condition(4) = {}", match_condition(4));
 	println!("match_condition(5) = {}", match_condition(5));
 	println!("match_condition(6) = {}", match_condition(6));
+	match_at(2);
+	match_at(3);
+	match_at(7);
+	match_at(8);
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -136,6 +140,13 @@ fn match_condition(x: i32) -> &'static str {
 		x if x == 5 => "equal to 5.",
 		x if 5 < x => "greater than 5.",
 		_ => "error",
+	}
+}
+
+fn match_at(x: i32) {
+	match x {
+		y @ 3..=7 => println!("{} in range 3..=7", y),
+		y => println!("{} in out of range 3..=7", y),
 	}
 }
 
