@@ -10,6 +10,8 @@ fn main() {
 	Pilot::fly(&Human);
 	Wizard::fly(&Human);
 	Human.fly();
+	println!("A baby dog is called {}.", Dog::baby_name());
+	println!("A baby dog is called {}.", <Dog as Animal>::baby_name());
 }
 
 #[derive(Debug)]
@@ -98,6 +100,24 @@ impl Pilot for Human {
 impl Wizard for Human {
 	fn fly(&self) {
 		println!("Up!");
+	}
+}
+
+trait Animal {
+	fn baby_name() -> String;
+}
+
+struct Dog;
+
+impl Dog {
+	fn baby_name() -> String {
+		"Spot".to_string()
+	}
+}
+
+impl Animal for Dog {
+	fn baby_name() -> String {
+		"puppy".to_string()
 	}
 }
 
