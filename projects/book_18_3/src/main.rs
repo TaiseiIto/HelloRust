@@ -17,6 +17,11 @@ fn main() {
 	println!("match_char_range('k') = {}", match_char_range('k'));
 	println!("match_char_range('z') = {}", match_char_range('z'));
 	println!("match_char_range('0') = {}", match_char_range('0'));
+	let p = Point {
+		x: 0,
+		y: 7,
+	};
+	match_struct(p);
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -59,5 +64,14 @@ fn match_char_range(c: char) -> &'static str {
 		'k'..='z' => "late ASCII letter",
 		_ => "something else",
 	}
+}
+
+struct Point {
+	x: i32,
+	y: i32,
+}
+
+fn match_struct(Point {x: a, y: b}: Point) {
+	println!("point ({}, {})", a, b);
 }
 
