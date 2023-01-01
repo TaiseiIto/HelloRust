@@ -41,6 +41,7 @@ fn main() {
 	match_first_and_last(vec![]);
 	match_first_and_last(vec![1]);
 	match_first_and_last(vec![1,2,3,4,5]);
+	make_ref_in_match("Hello, World!".to_string());
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -117,5 +118,12 @@ fn match_first_and_last(list: Vec<i32>) {
 			println!("last = {}", last);
 		},
 	};
+}
+
+fn make_ref_in_match(s: String) {
+	match s {
+		ref s => println!("s = {}", s),
+	}
+	println!("s = {}", s);
 }
 
