@@ -13,6 +13,8 @@ fn main() {
 	Human.fly();
 	println!("A baby dog is called {}.", Dog::baby_name());
 	println!("A baby dog is called {}.", <Dog as Animal>::baby_name());
+	let w = Wrapper(["hello", "world"].into_iter().map(|s| s.to_string()).collect::<Vec<String>>());
+	println!("w = {}", w);
 }
 
 #[derive(Debug)]
@@ -139,6 +141,14 @@ trait OutlinePrint: std::fmt::Display {
 		println!("* {} *", output);
 		println!("*{}*", " ".repeat(len + 2));
 		println!("{}", "*".repeat(len + 4));
+	}
+}
+
+struct Wrapper(Vec<String>);
+
+impl std::fmt::Display for Wrapper {
+	fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+		write!(f, "[{}]", self.0.join(", "))
 	}
 }
 
