@@ -4,6 +4,10 @@ fn main() {
 	println!("match_literal(2) = {}", match_literal(2));
 	println!("match_literal(3) = {}", match_literal(3));
 	shadowing();
+	println!("match_or(0) = {}", match_or(0));
+	println!("match_or(1) = {}", match_or(1));
+	println!("match_or(2) = {}", match_or(2));
+	println!("match_or(3) = {}", match_or(3));
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -23,5 +27,13 @@ fn shadowing() {
 		_ => (),
 	}
 	println!("y = {}", y);
+}
+
+fn match_or(x: u32) -> &'static str {
+	match x {
+		0 | 1 => "zero or one",
+		2 => "two",
+		_ => "many",
+	}
 }
 
