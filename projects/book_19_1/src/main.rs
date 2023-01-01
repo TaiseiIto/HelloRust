@@ -2,6 +2,9 @@ extern "C" {
 	fn abs(i: i32) -> i32;
 }
 
+static HELLO_WORLD: &str = "Hello, World!";
+static mut COUNTER: u32 = 0;
+
 fn main() {
 	let mut num: i32 = 5;
 	let immutable_pointer = &num as *const i32;
@@ -18,6 +21,11 @@ fn main() {
 	unsafe {
 		println!("abs(3) = {}", abs(3));
 		println!("abs(-3) = {}", abs(-3));
+	}
+	println!("{}", HELLO_WORLD);
+	unsafe {
+		COUNTER += 1;
+		println!("COUNTER = {}", COUNTER);
 	}
 }
 
