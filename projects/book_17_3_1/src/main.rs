@@ -9,6 +9,10 @@ fn main() {
     let post = post.reject();
     let post = post.request_review();
     let post = post.approve();
+    let post = post.reject();
+    let post = post.request_review();
+    let post = post.approve();
+    let post = post.approve();
 	println!("post.content() = \"{}\"", post.content());
 }
 
