@@ -8,6 +8,10 @@ fn main() {
 	println!("match_or(1) = {}", match_or(1));
 	println!("match_or(2) = {}", match_or(2));
 	println!("match_or(3) = {}", match_or(3));
+	println!("match_range(0) = {}", match_range(0));
+	println!("match_range(1) = {}", match_range(1));
+	println!("match_range(5) = {}", match_range(5));
+	println!("match_range(6) = {}", match_range(6));
 }
 
 fn match_literal(x: u32) -> &'static str {
@@ -34,6 +38,13 @@ fn match_or(x: u32) -> &'static str {
 		0 | 1 => "zero or one",
 		2 => "two",
 		_ => "many",
+	}
+}
+
+fn match_range(x: i32) -> &'static str {
+	match x {
+		1..=5 => "one through five",
+		_ => "other",
 	}
 }
 
