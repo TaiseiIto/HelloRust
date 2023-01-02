@@ -1,14 +1,24 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+extern crate proc_macro;
+
+use proc_macro::TokenStream;
+use quote::quite;
+use syn;
+
+#[proc_macro_derive(HelloMacro)]
+pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
+	let ast: syn::DeriveInput = syn::parse(input).unwrap();
+	impl_hello_macro(&ast);
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+fn impl_hello_macro(adt: &syn::DeriveInput) -> TokenStream {
+	let name = &ast.ident;
+	let gen = quote! {
+		impl HelloMacro for #name {
+			fn hello_macro() {
+				println!("Hello, Macro! My name is {}!", stringify!(#name));
+			}
+		}
+	};
+	gen.into();
 }
+
