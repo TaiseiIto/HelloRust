@@ -2,6 +2,7 @@ DOCKER = docker
 DOCKER_IMAGE = hello-rust
 DOCKER_IMAGE_TAG = latest
 DOCKER_CONTAINER = hello-rust
+GENIMG = genimg/genimg
 
 ifeq ($(OS), Windows_NT)
 BLANK =
