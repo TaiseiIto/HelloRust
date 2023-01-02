@@ -1,16 +1,16 @@
 extern crate proc_macro;
 
 use proc_macro::TokenStream;
-use quote::quite;
+use quote::quote;
 use syn;
 
 #[proc_macro_derive(HelloMacro)]
 pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
 	let ast: syn::DeriveInput = syn::parse(input).unwrap();
-	impl_hello_macro(&ast);
+	impl_hello_macro(&ast)
 }
 
-fn impl_hello_macro(adt: &syn::DeriveInput) -> TokenStream {
+fn impl_hello_macro(ast: &syn::DeriveInput) -> TokenStream {
 	let name = &ast.ident;
 	let gen = quote! {
 		impl HelloMacro for #name {
@@ -19,6 +19,6 @@ fn impl_hello_macro(adt: &syn::DeriveInput) -> TokenStream {
 			}
 		}
 	};
-	gen.into();
+	gen.into()
 }
 
