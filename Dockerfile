@@ -36,3 +36,6 @@ RUN cp tmux/.tmux.conf ..
 # vim setting
 RUN cat vim/.vimrc >> ../.vimrc
 
+# for https://doc.rust-jp.rs/book-ja/ch20-00-final-project-a-web-server.html
+EXPOSE 7878
+

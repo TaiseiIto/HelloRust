@@ -15,7 +15,7 @@ if [ $# -eq 4 ]; then
 		$docker build --no-cache -t $image:$tag ..
 	fi
 	if [ -z "$($docker ps -a | grep $container)" ]; then
-		$docker run --name $container -i -t $image
+		$docker run --name $container -p 7878:7878 -i -t $image
 	else
 		if [ -z "$($docker ps | grep $container)"]; then
 			$docker start $container
