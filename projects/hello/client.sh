@@ -11,8 +11,4 @@ while [ $(ps -a | grep $project | wc -l) -eq 0 ] ; do
 done
 sleep 1
 curl localhost:$port
-sleep 1
-if [ $(ps -a | grep $project | wc -l) -eq 1 ] ; then
-	kill $(ps -a | grep $project | awk '{print $1}')
-fi
 
