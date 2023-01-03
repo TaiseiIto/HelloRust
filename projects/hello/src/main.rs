@@ -16,7 +16,7 @@ fn handle_connection(mut stream: std::net::TcpStream) {
 	stream.read(&mut buffer).unwrap();
 	let request: String = (*String::from_utf8_lossy(&buffer[..])).to_string();
 	println!("request = {}", request);
-	let html_file: std::fs::File = std::fn::File::open("hello.html").unwrap();
+	let mut html_file: std::fs::File = std::fs::File::open("hello.html").unwrap();
 	let mut html: String = String::new();
 	html_file.read_to_string(&mut html).unwrap();
 	let responce: String = format!("HTTP/1.1 200 OK\n\n{}", html);
