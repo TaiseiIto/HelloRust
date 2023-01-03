@@ -25,6 +25,14 @@ fn handle_connection(mut stream: std::net::TcpStream) {
 		let responce: String = responce.replace("\n", "\r\n");
 		stream.write(responce.as_bytes()).unwrap();
 		stream.flush().unwrap();
+	} else {
+		let mut html_file: std::fs::File = std::fs::File::open("404.html").unwrap();
+		let mut html: String = String::new();
+		html_file.read_to_string(&mut html).unwrap();
+		let responce: String = format!("HTTP/1.1 404 NOT FOUND\n\n{}", html);
+		let responce: String = responce.replace("\n", "\r\n");
+		stream.write(responce.as_bytes()).unwrap();
+		stream.flush().unwrap();
 	}
 }
 
