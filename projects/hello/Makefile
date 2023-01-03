@@ -2,10 +2,12 @@ PROJECT = $(shell pwd | awk -F '/' '{print $$NF}')
 DEBUG = target/debug/$(PROJECT)
 RELEASE = target/release/$(PROJECT)
 SOURCE = $(shell find src | grep '^.*\.rs$$')
+PORT = 7878
 
 all: $(RELEASE)
-	./client.sh $(PROJECT) > clientout.txt &
-	./target/release/$(PROJECT) > serverout.txt
+	./client.sh $(PROJECT) $(PORT) > clientout.txt &
+	./target/release/$(PROJECT) $(PORT) > serverout.txt
+	cat serverout.txt
 
 build: $(DEBUG)
 
