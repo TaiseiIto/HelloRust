@@ -2,7 +2,10 @@ use std::io::Read;
 use std::net::TcpListener;
 
 fn main() {
-	let listener: std::net::TcpListener = TcpListener::bind("127.0.0.1:7878").unwrap();
+	let mut port: std::env::Args = std::env::args();
+	let prog_name: String = port.next().expect("There is no program name.");
+	let port: String = port.next().expect(&format!("Usage: {} <port>", prog_name));
+	let listener: std::net::TcpListener = TcpListener::bind(format!("127.0.0.1:{}", port)).unwrap();
 	let stream = listener.incoming().next().unwrap().unwrap();
 	handle_connection(stream);
 }
